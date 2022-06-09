@@ -13,7 +13,7 @@ namespace PNT1_CartaResto.Models
         {
 
         }
-            public Reserva(int id, string nombre, int capacidadMax, Usuario usuario, DateTime fecha, string tipo)
+            public Reserva(int id, string nombre, int capacidadMax, Usuario usuario, DateTime fecha, string tipo, Mesa mesa)
         {
             Id = id;
             Nombre = nombre;
@@ -21,6 +21,7 @@ namespace PNT1_CartaResto.Models
             Usuario = usuario;
             Fecha = fecha;
             Tipo = tipo;
+            Mesa = mesa;
         }
         public int Id { get; set; }
         public string Nombre { get; set; }
@@ -28,6 +29,7 @@ namespace PNT1_CartaResto.Models
         public Usuario Usuario { get; set; }
         public DateTime Fecha { get; set; }
         public string Tipo { get; set; }
+        public Mesa Mesa { get; set; }
 
 
 

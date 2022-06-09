@@ -11,6 +11,7 @@ namespace PNT1_CartaResto.Models
         {
             Id = id;
             EstaLibre = estaLibre;
+            
         }
 
         public int Id { get; set; }
