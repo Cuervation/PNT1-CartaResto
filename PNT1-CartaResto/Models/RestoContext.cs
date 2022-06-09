@@ -4,10 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace PNT1_CartaResto.Models
 {
     public class RestoContext : DbContext
     {
+        
+
+        public RestoContext(DbContextOptions<RestoContext> options) : base(options)
+        {
+        }
+        
 
         public DbSet<Mesa> Mesas { get; set; }
         public DbSet<Reserva> Reservas { get; set; }
