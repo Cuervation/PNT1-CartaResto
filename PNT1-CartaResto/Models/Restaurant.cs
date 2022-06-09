@@ -9,7 +9,7 @@ namespace PNT1_CartaResto.Models
     {
 
 
-        public Restaurant()
+        public Restauranst()
         {
          
         }
