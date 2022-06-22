@@ -7,12 +7,22 @@ namespace PNT1_CartaResto.Models
 {
     public class Mesa
     {
+
+        public Mesa()
+        {
+
+
+        }
+
         public Mesa(int id, bool estaLibre)
         {
             Id = id;
             EstaLibre = estaLibre;
             
         }
+
+
+
 
         public int Id { get; set; }
         public Boolean EstaLibre { get; set; }
