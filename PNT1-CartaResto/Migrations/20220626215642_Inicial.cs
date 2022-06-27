@@ -40,10 +40,10 @@ namespace PNT1_CartaResto.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(nullable: true),
-                    Apellido = table.Column<string>(nullable: true),
-                    Mail = table.Column<string>(nullable: true),
-                    Contraseña = table.Column<string>(nullable: true)
+                    Nombre = table.Column<string>(maxLength: 50, nullable: false),
+                    Apellido = table.Column<string>(maxLength: 50, nullable: false),
+                    Mail = table.Column<string>(maxLength: 50, nullable: false),
+                    Contraseña = table.Column<string>(maxLength: 8, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -56,11 +56,11 @@ namespace PNT1_CartaResto.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(nullable: true),
-                    CapacidadMax = table.Column<int>(nullable: false),
+                    Mail = table.Column<string>(maxLength: 50, nullable: false),
+                    Comensales = table.Column<int>(nullable: false),
                     UsuarioId = table.Column<int>(nullable: true),
                     Fecha = table.Column<DateTime>(nullable: false),
-                    Tipo = table.Column<string>(nullable: true)
+                    Tipo = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

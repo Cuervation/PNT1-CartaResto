@@ -69,3 +69,22 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+.form {
+    background-color: #f3efe9; /*rgb(255 255 255);*/
+    padding-left: 35px;
+    padding-right: 35px;
+    padding-top: 35px;
+    padding-bottom: 50px;
+    /*width: 450px;*/
+    float: left;
+    /*left: 50%;*/
+    position: absolute;
+    margin-top: 90px;
+    /*   margin-left: -260px;*/
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+}
+.botonCentrado {
+    display: flex;
+    align-items: center;
+}

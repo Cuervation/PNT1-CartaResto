@@ -7,9 +7,10 @@ namespace PNT1_CartaResto.Models
 {
     public enum Restricciones
     {
+        SIN_RESTRICCIONES,
         VEGANO,
         VEGETARIANO,
-        CELIACO,
-        LIBRE
+        CELIACO
+        
     }
 }

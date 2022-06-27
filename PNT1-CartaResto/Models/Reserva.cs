@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using System.ComponentModel.DataAnnotations;
 
 namespace PNT1_CartaResto.Models
 {
@@ -13,23 +13,28 @@ namespace PNT1_CartaResto.Models
         {
 
         }
-        //    public Reserva(int id, string nombre, int capacidadMax, Usuario usuario, DateTime fecha, string tipo, Mesa mesa)
-        //{
-        //    Id = id;
-        //    Nombre = nombre;
-        //    CapacidadMax = capacidadMax;
-        //    Usuario = usuario;
-        //    Fecha = fecha;
-        //    Tipo = tipo;
-        //    Mesa = mesa;
-        //}
         public int Id { get; set; }
-        public string Nombre { get; set; }
-        public int CapacidadMax { get; set; }
-        public Usuario Usuario { get; set; }
+        [StringLength(50)]
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Mail:")]
+        [EmailAddress(ErrorMessage = "Ingrese un mail válido")]
+        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "Ingrese un mail válido")]
+        [Required(ErrorMessage = "Por favor ingrese su mail.")]
+        public string Mail { get; set; }
+        //[Range(1, 15, ErrorMessage = "Las reservas son entre {1} y {2} comensales.")]
+        [Required(ErrorMessage = "Por favor ingrese los comensales.")]
+        public int Comensales { get; set; }
+        public Usuario Usuario { get; set; } 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Fecha { get; set; }
-        public string Tipo { get; set; }
-        public Mesa Mesa { get; set; }
+        [Display(Name = "Restriccion:")]
+        [EnumDataType(typeof(Restricciones))]
+        public Restricciones Tipo { get; set; }
+
+        //public int MesaId { get; set; }
+
+        //public Mesa Mesa { get; set; }
 
 
 

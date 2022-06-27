@@ -4,11 +4,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PNT1_CartaResto.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace PNT1_CartaResto.Controllers
 {
     public class AuthController : Controller
     {
+
+        private readonly RestoContext _context;
+
+        public AuthController(RestoContext context)
+        {
+            _context = context;
+        }
+
+
         // GET: AuthController
         public ActionResult Index()
         {
@@ -28,8 +39,13 @@ namespace PNT1_CartaResto.Controllers
         }
 
 
-        public ActionResult Login()
-        {            
+        public ActionResult Login(String Mail, String Pass)
+        {
+            var usuario = _context.Usuarios.FirstOrDefaultAsync(m => m.Mail == Mail && m.Contraseña == Pass);
+            if (usuario == null)
+            {
+                return NotFound();
+            }
             return RedirectToAction("Index", "Home");
         }
 

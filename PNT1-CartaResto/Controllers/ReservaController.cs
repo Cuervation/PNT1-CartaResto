@@ -53,7 +53,7 @@ namespace PNT1_CartaResto.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,CapacidadMax,Fecha,Tipo")] Reserva reserva)
+        public async Task<IActionResult> Create([Bind("Id,Mail,CapacidadMax,Fecha,Tipo")] Reserva reserva)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace PNT1_CartaResto.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,CapacidadMax,Fecha,Tipo")] Reserva reserva)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Mail,CapacidadMax,Fecha,Tipo")] Reserva reserva)
         {
             if (id != reserva.Id)
             {

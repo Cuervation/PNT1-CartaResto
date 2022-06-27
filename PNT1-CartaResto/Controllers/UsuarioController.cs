@@ -18,6 +18,18 @@ namespace PNT1_CartaResto.Controllers
             _context = context;
         }
 
+
+        public ActionResult Login(String Mail, String Pass)
+        {
+            var usuario = _context.Usuarios.FirstOrDefaultAsync(m => m.Mail == Mail && m.Contraseña == Pass);
+            //if (usuario == null)
+            //{
+            //    return NotFound();
+            //}
+            //return RedirectToAction("Index", "Home");
+            return View();
+        }
+
         // GET: Usuario
         public async Task<IActionResult> Index()
         {
