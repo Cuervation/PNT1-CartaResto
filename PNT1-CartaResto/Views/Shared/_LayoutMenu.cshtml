@@ -32,13 +32,14 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            <nav role='navigation'>
-                <ul>                    
+            <nav role='navigation'>                                
+                <ul>
+                    @*<li><a id="gear" href="#"><img id="g" src="../../images/logo.jpg" /></a></li>*@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Ingresar", "Login", "Usuario")</li>
-                    <li>@Html.ActionLink("Registrarse", "Create", "Usuario")</li>                    
+                    <li>@Html.ActionLink("Registrarse", "Create", "Usuario")</li>
                     <li> @Html.ActionLink("Reservar", "Create", "Reserva") </li>
-                    <li> @Html.ActionLink("Lista Reservas", "Index","Reserva") </li>
+                    <li> @Html.ActionLink("Lista Reservas", "Index", "Reserva") </li>
 
                 </ul>
             </nav>

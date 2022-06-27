@@ -21,7 +21,7 @@ namespace PNT1_CartaResto.Models
         [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "Ingrese un mail válido")]
         [Required(ErrorMessage = "Por favor ingrese su mail.")]
         public string Mail { get; set; }
-        //[Range(1, 15, ErrorMessage = "Las reservas son entre {1} y {2} comensales.")]
+        [Range(1, 15, ErrorMessage = "Las reservas son entre {1} y {2} comensales.")]
         [Required(ErrorMessage = "Por favor ingrese los comensales.")]
         public int Comensales { get; set; }
         public Usuario Usuario { get; set; } 

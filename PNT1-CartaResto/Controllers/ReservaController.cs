@@ -13,6 +13,7 @@ namespace PNT1_CartaResto.Controllers
     {
         private readonly RestoContext _context;
 
+        
         public ReservaController(RestoContext context)
         {
             _context = context;
@@ -53,10 +54,11 @@ namespace PNT1_CartaResto.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Mail,CapacidadMax,Fecha,Tipo")] Reserva reserva)
+        public async Task<IActionResult> Create([Bind("Id,Mail,Comensales,Fecha,Tipo")] Reserva reserva)
         {
             if (ModelState.IsValid)
-            {
+            {                
+                reserva.Usuario = await _context.Usuarios.FirstOrDefaultAsync(m => m.Mail == reserva.Mail);
                 _context.Add(reserva);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -85,7 +87,7 @@ namespace PNT1_CartaResto.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Mail,CapacidadMax,Fecha,Tipo")] Reserva reserva)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Mail,Comensales,Fecha,Tipo")] Reserva reserva)
         {
             if (id != reserva.Id)
             {
@@ -96,6 +98,7 @@ namespace PNT1_CartaResto.Controllers
             {
                 try
                 {
+                    reserva.Usuario = await _context.Usuarios.FirstOrDefaultAsync(m => m.Mail == reserva.Mail);
                     _context.Update(reserva);
                     await _context.SaveChangesAsync();
                 }
