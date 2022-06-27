@@ -20,6 +20,7 @@ namespace PNT1_CartaResto.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.Auth = true;            
             return View();
         }
 

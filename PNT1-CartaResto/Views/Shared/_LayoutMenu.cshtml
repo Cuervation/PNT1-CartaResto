@@ -34,13 +34,28 @@
         <main role="main" class="pb-3">
             <nav role='navigation'>                                
                 <ul>
-                    @*<li><a id="gear" href="#"><img id="g" src="../../images/logo.jpg" /></a></li>*@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Ingresar", "Login", "Usuario")</li>
-                    <li>@Html.ActionLink("Registrarse", "Create", "Usuario")</li>
                     <li> @Html.ActionLink("Reservar", "Create", "Reserva") </li>
                     <li> @Html.ActionLink("Lista Reservas", "Index", "Reserva") </li>
+                    <li>@Html.ActionLink("Ingresar", "Login", "Usuario")</li>
+                    <li>@Html.ActionLink("Registrarse", "Create", "Usuario")</li>
 
+
+        @*<li><a id="gear" href="#"><img id="g" src="../../images/logo.jpg" /></a></li>*@
+
+                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+
+        @if (@ViewBag.Auth)
+        {
+            <li> @Html.ActionLink("Reservar", "Create", "Reserva") </li>
+            <li> @Html.ActionLink("Lista Reservas", "Index", "Reserva") </li>
+        }
+        else
+        {
+            <li>@Html.ActionLink("Ingresar", "Login", "Usuario")</li>
+            <li>@Html.ActionLink("Registrarse", "Create", "Usuario")</li>
+        }*@
                 </ul>
             </nav>
             @RenderBody()
@@ -48,9 +63,9 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - PNT1_Reserva_Restaurant
-        </div>
+        @*<div class="container">*@
+            <a> &copy; 2022 - PNT1_Reserva_Restaurant</a>
+        @*</div>*@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

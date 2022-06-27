@@ -27,6 +27,7 @@ namespace PNT1_CartaResto.Controllers
             //    return NotFound();
             //}
             //return RedirectToAction("Index", "Home");
+            //ViewBag.Auth = true;
             return View();
         }
 
