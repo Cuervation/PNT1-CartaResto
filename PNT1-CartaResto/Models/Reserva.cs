@@ -26,7 +26,7 @@ namespace PNT1_CartaResto.Models
         public int Comensales { get; set; }
         public Usuario Usuario { get; set; } 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Fecha { get; set; }
         [Display(Name = "Restriccion:")]
         [EnumDataType(typeof(Restricciones))]

@@ -13,7 +13,6 @@ namespace PNT1_CartaResto.Controllers
     {
         private readonly RestoContext _context;
 
-        
         public ReservaController(RestoContext context)
         {
             _context = context;
@@ -57,11 +56,35 @@ namespace PNT1_CartaResto.Controllers
         public async Task<IActionResult> Create([Bind("Id,Mail,Comensales,Fecha,Tipo")] Reserva reserva)
         {
             if (ModelState.IsValid)
-            {                
+            {
                 reserva.Usuario = await _context.Usuarios.FirstOrDefaultAsync(m => m.Mail == reserva.Mail);
-                _context.Add(reserva);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+
+
+                var duplicada = _context.Reservas.Where(m => m.Mail == reserva.Mail && m.Fecha == reserva.Fecha).ToList().Count();
+                if (duplicada > 0 )
+                {
+                    @ViewBag.error = "Usted ya tiene una reserva para la fecha " + reserva.Fecha.ToString("dd-MM-yyyy") + ".";
+                }
+                else
+                {
+                    var resto = await _context.Restaurants.FirstOrDefaultAsync();
+                    var comensales = _context.Reservas
+                        .Where(r => r.Fecha == reserva.Fecha)
+                        .Sum(r => r.Comensales);
+
+                    if (resto.CapacidadMax >= (comensales + reserva.Comensales))
+                    {
+                        _context.Add(reserva);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        @ViewBag.error = "La reserva excede la capacidad máxima del restaurant.";
+
+                    }
+                }
             }
             return View(reserva);
         }
@@ -99,8 +122,22 @@ namespace PNT1_CartaResto.Controllers
                 try
                 {
                     reserva.Usuario = await _context.Usuarios.FirstOrDefaultAsync(m => m.Mail == reserva.Mail);
-                    _context.Update(reserva);
-                    await _context.SaveChangesAsync();
+                    var resto = await _context.Restaurants.FirstOrDefaultAsync();
+                    var comensales = _context.Reservas
+                        .Where(r => r.Fecha == reserva.Fecha && r.Id != reserva.Id)
+                        .Sum(r => r.Comensales);
+                    if (resto.CapacidadMax >= (comensales + reserva.Comensales))
+                    {
+
+                        _context.Update(reserva);
+                        await _context.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        @ViewBag.error = "La reserva excede la capacidad máxima del restaurant.";
+                        return View(reserva);
+                    }
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {

@@ -17,12 +17,14 @@ namespace PNT1_CartaResto.Models
         {
             this.Id = id;
             this.Nombre = nombre;
-            this.CapacidadMax = capMax;
+            
         }
 
         public int Id { get; set; }
-        public string Nombre { get; set; }
+        public string Nombre { get; set; }                
         public int CapacidadMax { get; set; }
+
+
 
     }
 }

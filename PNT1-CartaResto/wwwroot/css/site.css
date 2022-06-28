@@ -88,3 +88,6 @@ body {
     display: flex;
     align-items: center;
 }
+.label_rojo{
+    color: red;
+}
