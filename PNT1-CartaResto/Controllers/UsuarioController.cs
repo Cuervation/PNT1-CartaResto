@@ -18,19 +18,19 @@ namespace PNT1_CartaResto.Controllers
             _context = context;
         }
 
-
-        public ActionResult Login(String Mail, String Pass)
+        
+        public ActionResult Login(Usuario usuario)
         {
-            var usuario = _context.Usuarios.FirstOrDefaultAsync(m => m.Mail == Mail && m.Contraseña == Pass);
-            //if (usuario == null)
-            //{
-            //    return NotFound();
-            //}
-            //return RedirectToAction("Index", "Home");
-            //ViewBag.Auth = true;
-            return View();
+            if (usuario.Mail != null)
+            {
+                var usuarioBuscado = _context.Usuarios.FirstOrDefaultAsync(m => m.Mail == usuario.Mail && m.Contraseña == usuario.Contraseña);
+                if (usuarioBuscado != null)
+                {
+                    return RedirectToAction("Create", "Reserva");
+                }
+            }
+            return View(usuario);
         }
-
         // GET: Usuario
         public async Task<IActionResult> Index()
         {
@@ -70,9 +70,17 @@ namespace PNT1_CartaResto.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(usuario);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                var usuarioCreado = await _context.Usuarios.FirstOrDefaultAsync(m => m.Mail == usuario.Mail);
+                if (usuarioCreado == null) { 
+                    _context.Add(usuario);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    @ViewBag.error = "El usuario ya se encuentra en nuestra base de datos.";
+                }
             }
             return View(usuario);
         }

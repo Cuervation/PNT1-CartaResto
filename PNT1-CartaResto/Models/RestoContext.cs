@@ -15,8 +15,7 @@ namespace PNT1_CartaResto.Models
         {
         }
         
-
-        public DbSet<Mesa> Mesas { get; set; }
+                
         public DbSet<Reserva> Reservas { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
