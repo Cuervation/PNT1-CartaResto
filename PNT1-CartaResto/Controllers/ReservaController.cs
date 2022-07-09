@@ -57,35 +57,46 @@ namespace PNT1_CartaResto.Controllers
         {
             if (ModelState.IsValid)
             {
-                reserva.Usuario = await _context.Usuarios.FirstOrDefaultAsync(m => m.Mail == reserva.Mail);
-
-
-
-                var duplicada = _context.Reservas.Where(m => m.Mail == reserva.Mail && m.Fecha == reserva.Fecha).ToList().Count();
-                if (duplicada > 0 )
+                
+                if (reserva.Fecha >= DateTime.Today)
                 {
-                    @ViewBag.error = "Usted ya tiene una reserva para la fecha " + reserva.Fecha.ToString("dd-MM-yyyy") + ".";
-                }
-                else
-                {
-                    var resto = await _context.Restaurants.FirstOrDefaultAsync();
-                    var comensales = _context.Reservas
-                        .Where(r => r.Fecha == reserva.Fecha)
-                        .Sum(r => r.Comensales);
 
-                    if (resto.CapacidadMax >= (comensales + reserva.Comensales))
+
+                    reserva.Usuario = await _context.Usuarios.FirstOrDefaultAsync(m => m.Mail == reserva.Mail);
+
+
+
+                    var duplicada = _context.Reservas.Where(m => m.Mail == reserva.Mail && m.Fecha == reserva.Fecha).ToList().Count();
+                    if (duplicada > 0 )
                     {
-                        _context.Add(reserva);
-                        await _context.SaveChangesAsync();
-                        return RedirectToAction(nameof(Index));
+                        @ViewBag.error = "Usted ya tiene una reserva para la fecha " + reserva.Fecha.ToString("dd-MM-yyyy") + ".";
                     }
                     else
                     {
-                        @ViewBag.error = "La reserva excede la capacidad máxima del restaurant.";
+                        var resto = await _context.Restaurants.FirstOrDefaultAsync();
+                        var comensales = _context.Reservas
+                            .Where(r => r.Fecha == reserva.Fecha)
+                            .Sum(r => r.Comensales);
 
+                        if (resto.CapacidadMax >= (comensales + reserva.Comensales))
+                        {
+                            _context.Add(reserva);
+                            await _context.SaveChangesAsync();
+                            return RedirectToAction(nameof(Index));
+                        }
+                        else
+                        {
+                            @ViewBag.error = "La reserva excede la capacidad máxima del restaurant.";
+
+                        }
                     }
                 }
+                else
+                {
+                    @ViewBag.error = "La fecha no puede ser menor a hoy.";
+                }
             }
+ 
             return View(reserva);
         }
 
